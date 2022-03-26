@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:table_sticky_headers/table_sticky_headers.dart';
 
 void main() {
-  final columns = 10;
-  final rows = 20;
+  final columns = 5;
+  final rows = 10;
 
   List<List<String>> _makeData() {
     final List<List<String>> output = [];
-    for (int i = 0; i < columns; i++) {
+    for (int i = 1; i < columns; i++) {
       final List<String> row = [];
-      for (int j = 0; j < rows; j++) {
+      for (int j = 1; j < rows; j++) {
         row.add('T$i : L$j');
       }
       output.add(row);
@@ -18,10 +18,10 @@ void main() {
   }
 
   /// Simple generator for column title
-  List<String> _makeTitleColumn() => List.generate(columns, (i) => 'Top $i');
+  List<String> _makeTitleColumn() => List.generate(columns, (i) => 'Topic $i');
 
   /// Simple generator for row title
-  List<String> _makeTitleRow() => List.generate(rows, (i) => 'Left $i');
+  List<String> _makeTitleRow() => List.generate(rows, (i) => 'Day $i');
 
   runApp(
     TableSimple(
@@ -44,11 +44,13 @@ class TableSimple extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Sticky Headers Two-Dimension  Table'),
-          backgroundColor: Colors.amber,
-        ),
+            title: Text('WORKFLOW',
+                style: TextStyle(
+                    color: Colors.black, fontWeight: FontWeight.bold)),
+            backgroundColor: Colors.purple),
         body: StickyHeadersTable(
           columnsLength: titleColumn.length,
           rowsLength: titleRow.length,
@@ -56,7 +58,7 @@ class TableSimple extends StatelessWidget {
           rowsTitleBuilder: (i) => Text(titleRow[i]),
           contentCellBuilder: (i, j) =>
               Container(height: 50, width: 50, child: TextField()),
-          legendCell: Text('Sticky Legend'),
+          legendCell: Text('Course:'),
         ),
       ),
     );
